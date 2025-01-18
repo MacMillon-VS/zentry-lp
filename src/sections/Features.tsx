@@ -5,8 +5,8 @@ type BentoTiltProps = {
   className?: string;
 }
 export const BentoTilt = ({ children, className = "" }: BentoTiltProps) => {
-  const [transformStyle, setTransformStyle] = useState("");
-  const itemRef = useRef<HTMLDivElement|null>(null);
+  const [transformStyle, setTransformStyle] = useState<string>("");
+  const itemRef = useRef<HTMLDivElement | null>(null);
 
   const handleMouseMove = (event: React.MouseEvent) => {
     if (!itemRef.current) return;
@@ -43,14 +43,14 @@ export const BentoTilt = ({ children, className = "" }: BentoTiltProps) => {
 
 type BentoCardProps = {
   src: string;
-  title: string|JSX.Element;
+  title: string | JSX.Element;
   description?: string;
   isComingSoon?: boolean;
 }
 export const BentoCard = ({ src, title, description, isComingSoon }: BentoCardProps) => {
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [hoverOpacity, setHoverOpacity] = useState(0);
-  const hoverButtonRef = useRef<HTMLDivElement|null>(null);
+  const [cursorPosition, setCursorPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [hoverOpacity, setHoverOpacity] = useState<number>(0);
+  const hoverButtonRef = useRef<HTMLDivElement | null>(null);
 
   const handleMouseMove = (event: React.MouseEvent) => {
     if (!hoverButtonRef.current) return;

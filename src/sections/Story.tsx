@@ -5,9 +5,9 @@ import Button from "../components/Button";
 
 
 const Story = () => {
-  const frameRef = useRef(null);
+  const frameRef = useRef<HTMLImageElement | null>(null);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent) => {
     const { clientX, clientY } = e;
     const element = frameRef.current;
 
@@ -74,7 +74,6 @@ const Story = () => {
               </div>
             </div>
 
-            {/* for the rounded corner */}
             <svg
               className="invisible absolute size-0"
               xmlns="http://www.w3.org/2000/svg"

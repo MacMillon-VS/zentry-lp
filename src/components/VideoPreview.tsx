@@ -1,21 +1,24 @@
 import { gsap } from "gsap";
 import { useState, useRef, useEffect } from "react";
 
-export const VideoPreview = ({ children }) => {
-  const [isHovering, setIsHovering] = useState(false);
+type handleMouseMoveProps = {
+  clientX: number;
+  clientY: number;
+  currentTarget: any;
+}
+export const VideoPreview = ({ children }: { children: React.ReactNode }) => {
+  const [isHovering, setIsHovering] = useState<boolean>(false);
 
-  const sectionRef = useRef(null); // Reference for the container section
-  const contentRef = useRef(null); // Reference for the inner content
+  const sectionRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
 
-  // Handles mouse movement over the container
-  const handleMouseMove = ({ clientX, clientY, currentTarget }) => {
+  const handleMouseMove = ({ clientX, clientY, currentTarget }: handleMouseMoveProps) => {
     const rect = currentTarget.getBoundingClientRect(); // Get dimensions of the container
 
     const xOffset = clientX - (rect.left + rect.width / 2); // Calculate X offset
     const yOffset = clientY - (rect.top + rect.height / 2); // Calculate Y offset
 
     if (isHovering) {
-      // Move the container slightly in the direction of the cursor
       gsap.to(sectionRef.current, {
         x: xOffset,
         y: yOffset,

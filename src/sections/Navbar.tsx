@@ -9,25 +9,21 @@ import Button from "../components/Button";
 const navItems = ["Nexus", "Vault", "Prologue", "About", "Contact"];
 
 const NavBar = () => {
-  // State for toggling audio and visual indicator
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const [isIndicatorActive, setIsIndicatorActive] = useState(false);
+  const [isAudioPlaying, setIsAudioPlaying] = useState<boolean>(false);
+  const [isIndicatorActive, setIsIndicatorActive] = useState<boolean>(false);
 
-  // Refs for audio and navigation container
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
-  const navContainerRef = useRef(null);
+  const navContainerRef = useRef<HTMLDivElement | null>(null);
 
   const { y: currentScrollY } = useWindowScroll();
-  const [isNavVisible, setIsNavVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isNavVisible, setIsNavVisible] = useState<boolean>(true);
+  const [lastScrollY, setLastScrollY] = useState<number>(0);
 
-  // Toggle audio and visual indicator
   const toggleAudioIndicator = () => {
     setIsAudioPlaying((prev) => !prev);
     setIsIndicatorActive((prev) => !prev);
   };
 
-  // Manage audio playback
   useEffect(() => {
     if (isAudioPlaying) {
       audioElementRef.current?.play();
@@ -38,17 +34,14 @@ const NavBar = () => {
 
   useEffect(() => {
     if (currentScrollY === 0) {
-      // Topmost position: show navbar without floating-nav
       setIsNavVisible(true);
-      navContainerRef.current.classList.remove("floating-nav");
+      navContainerRef.current?.classList.remove("floating-nav");
     } else if (currentScrollY > lastScrollY) {
-      // Scrolling down: hide navbar and apply floating-nav
       setIsNavVisible(false);
-      navContainerRef.current.classList.add("floating-nav");
+      navContainerRef.current?.classList.add("floating-nav");
     } else if (currentScrollY < lastScrollY) {
-      // Scrolling up: show navbar with floating-nav
       setIsNavVisible(true);
-      navContainerRef.current.classList.add("floating-nav");
+      navContainerRef.current?.classList.add("floating-nav");
     }
 
     setLastScrollY(currentScrollY);

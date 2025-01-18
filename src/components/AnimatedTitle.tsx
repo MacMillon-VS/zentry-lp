@@ -11,7 +11,7 @@ interface AnimatedTitleProps {
 gsap.registerPlugin(ScrollTrigger);
 
 const AnimatedTitle = ({ title, containerClass }: AnimatedTitleProps) => {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -36,7 +36,7 @@ const AnimatedTitle = ({ title, containerClass }: AnimatedTitleProps) => {
       );
     }, containerRef);
 
-    return () => ctx.revert(); // Clean up on unmount
+    return () => ctx.revert();
   }, []);
 
   return (
